@@ -1,0 +1,63 @@
+html {
+  padding: 20px;
+}
+
+h2 {
+  width: 100%;
+  text-align: center;
+}
+
+.menu-title {
+  text-align: center;
+}
+
+.column {
+  border: 1px rgb(105, 105, 105) solid;
+  padding:10px;
+}
+
+.table-upgrade {
+  text-align: center;
+  width: 100%;
+}
+
+.table-status {
+  text-align: right;
+}
+
+.table-status td {
+  padding: 5px;
+}
+
+.table-status td :nth-child(2) {
+  text-align: left;
+
+}
+
+.table-aquired {
+  width: 100%;
+  text-align: center;
+}
+
+.factory-list {
+  list-style-type: none;
+  padding: 0;
+  width: 100%;
+
+}
+
+.factory-list table { width: 100%; }
+
+.factory-list td {
+  padding: 5px;
+}
+
+.factory-list td :last-child {
+  text-align: right;
+}
+
+.factory-list li {
+  padding: 5px;
+  border-bottom : 1px black solid;
+  margin:0;
+}
