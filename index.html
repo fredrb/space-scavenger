@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="scavengerApp">
+<head>
+  <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" type="text/css" href="css/main.css"/>
+  <script src="node_modules/angular/angular.min.js"></script>
+  <script src="js/ui/controller.js"></script>
+</head>
+<body>
+  <h2>Space Scavenger</h2>
+  <div class="container">
+    <div class="row">
+      <div id="statusWrap" class="col-md-4 column" ng-controller="StatusController">
+        <div class="menu-title">
+          <b> Resources </b>
+        </div>
+        <table class="table-status">
+          <tr ng-repeat="item in items">
+            <td> <b>{{item.name}}</b> <img ng-src="assets/images/{{item.filename}}"></td>
+            <td> {{item.amount}} </td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="col-md-4">
+        <canvas id="grid" width="300" height="300" style="border:1px solid #000000;">
+          Your browser does not support the HTML5 canvas tag.
+        </canvas>
+        <div id="messageWrap" ng-controller="MessageController">
+          <ul ng-repeat="message in messages">
+            <li>
+              {{message.text}}
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div id="upgradeWrap" class="col-md-4" ng-controller="UpgradeController">
+        <div class="column">
+          <div class="menu-title">
+            <b> Droid Factory </b>
+          </div>
+
+          <ul class="factory-list">
+            <li ng-repeat="item in items">
+              <table>
+                <tr>
+                  <td>
+                    <b>{{item.name}}</b>
+                  </td>
+                  <td> Delay {{parseTimer(item.timer)}} </td>
+                  <td>  <button class="btn btn-primary" ng-click="buyUpgrade(item)">Create</button></td>
+                </tr>
+              </table>
+              <table>
+                <tr>
+                  <td ng-repeat="req in item.requirements">
+                    <img ng-src="assets/images/{{req.item.filename}}"> x {{req.quantity}}
+                  </td>
+                </tr>
+              </table>
+            </li>
+          <ul>
+
+          <!-- <table class="table-upgrade">
+            <tr ng-repeat="item in items">
+
+              <span ng-repeat="req in item.requirements">
+                <img ng-src="assets/images/{{req.item.filename}}"> x {{req.quantity}}
+              </span>
+            </tr>
+          </table> -->
+        </div>
+        <div class="column">
+          <table class="table-aquired">
+            <tr ng-repeat="item in aquired">
+              <td> <b>{{item.name}}</b></td>
+              <td> Delay {{parseTimer(item.timer)}} </td>
+              <td> <b>Quantity:</b> {{item.quantity}}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/grid/canvas.js"></script>
+  <script src="js/grid/grid.js"></script>
+  <script src="js/game/materialData.js"></script>
+  <script src="js/game/blockData.js"></script>
+  <script src="js/game/droidData.js"></script>
+  <script src="js/game/game.js"></script>
+
+  <script>
+    var game = new Game();
+    var grid = game.grid;
+  </script>
+
+</div>
+</body>
+</html>
