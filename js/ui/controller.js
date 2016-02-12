@@ -18,44 +18,38 @@ scavengerApp.controller('MessageController', function($scope) {
 scavengerApp.controller('UpgradeController', function($scope) {
   $scope.items = [
     ServiceDroid,
-    SurvalianceDrone,
-    GarbadgeCollector,
-    R2D2
+    SmartCollector,
+    CourierDrone,
+    AutomatedBulldozer,
+    SmartGarbageCollector
   ]
 
   $scope.parseTimer = function(timer) {
-    return (timer/100) + " sec.";
+    return Math.round((timer/1000)*100)/100 + " sec.";
   }
 
   $scope.aquired = [];
 
-  $scope.buyUpgrade = function(droid) {
-    for(var i in droid.requirements) {
-      if (droid.requirements[i].item.amount < droid.requirements[i].quantity) {
-        alert("No resources")
-        return;
-      }
-    }
-
-    for(var i in droid.requirements) {
-      droid.requirements[i].item.amount -= droid.requirements[i].quantity;
-    }
-
-    completeBuy(droid);
+  $scope.buildDroid = function(droid) {
+    var timer = game.buildDroid(droid);
+    if (timer != null)
+      $scope.enableDroid(timer);
   }
 
-  function completeBuy(droid) {
+  $scope.hasResourcesToBuild = function(droid) {
+    return game.hasResourcesToBuild(droid);
+  }
+
+  $scope.enableDroid = function(timer) {
     for (var robot in $scope.aquired) {
-      if ($scope.aquired[robot].name === droid.name) {
-        $scope.aquired[robot].quantity += 1;
-        game.robotTimer(droid);
+      if ($scope.aquired[robot].droid.name === timer.droid.name) {
+        $scope.aquired[robot].droid.quantity += 1;
         return;
       }
     }
 
-    droid.quantity = 1;
-    $scope.aquired.push(droid);
-    game.robotTimer(droid);
+    timer.droid.quantity = 1;
+    $scope.aquired.push(timer);
   }
 });
 
@@ -64,24 +58,54 @@ scavengerApp.controller('StatusController', function($scope) {
     MetalScrap,
     OldEquipment,
     ReusableMaterial,
+    Battery,
+    PreciousItem,
+    ToolBox,
+    ValuableData,
     PowerCell
   ]
 
-  $scope.increment = function(name) {
-    for(var item in $scope.items) {
-      if ($scope.items[item].name === name) {
-        $scope.items[item].amount += 1;
+  $scope.increment = function(item, val) {
+    $scope.items.forEach(function(v) {
+      if (v === item)
+        v.amount += val || 1;
         return;
-      }
-    }
+    });
+  }
+
+  $scope.decrement = function(item, val) {
+    $scope.items.forEach(function(v) {
+      if (v === item)
+        v.amount -= val || 1;
+        return;
+    });
+  }
+});
+
+scavengerApp.controller('TradeController', function($scope) {
+  $scope.items = TradePropositions;
+
+  $scope.acceptTrade = function(trade) {
+    game.acceptTrade(trade);
+  }
+
+  $scope.hasResourcesToTrade = function(trade) {
+    return game.hasResourcesToTrade(trade);
   }
 });
 
 var Status = {
-  increment : function(item) {
+  increment : function(item, val) {
     var scope = angular.element(document.getElementById("statusWrap")).scope();
     scope.$apply(function() {
-      scope.increment(item);
+      scope.increment(item, val);
+    });
+  },
+
+  decrement : function(item, val) {
+    var scope = angular.element(document.getElementById("statusWrap")).scope();
+    scope.$apply(function() {
+      scope.decrement(item, val);
     });
   }
 };

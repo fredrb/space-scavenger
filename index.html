@@ -10,20 +10,39 @@
   <h2>Space Scavenger</h2>
   <div class="container">
     <div class="row">
-      <div id="statusWrap" class="col-md-4 column" ng-controller="StatusController">
-        <div class="menu-title">
-          <b> Resources </b>
+      <div class="col-md-3" >
+        <div id="statusWrap" class="column" ng-controller="StatusController">
+          <div class="menu-title">
+            <b> Resources </b>
+          </div>
+          <table class="table-status">
+            <tr ng-repeat="item in items">
+              <td> <b>{{item.name}}</b> <img ng-src="assets/images/{{item.filename}}"></td>
+              <td> {{item.amount}} </td>
+            </tr>
+          </table>
         </div>
-        <table class="table-status">
-          <tr ng-repeat="item in items">
-            <td> <b>{{item.name}}</b> <img ng-src="assets/images/{{item.filename}}"></td>
-            <td> {{item.amount}} </td>
-          </tr>
-        </table>
+        <div id="tradeWrap" class="column" ng-controller="TradeController">
+          <div class="menu-title">
+            <b> Trade </b>
+          </div>
+          <table class="table-status">
+            <tr ng-repeat="item in items">
+              <td>
+                <img ng-src="assets/images/{{item.required.item.filename}}"> x {{item.required.quantity}}
+              </td>
+              <td>
+                for: <img ng-src="assets/images/{{item.reward.filename}}">
+              </td>
+              <td>
+                <button class="btn btn-primary" ng-click="acceptTrade(item)" ng-disabled="!hasResourcesToTrade(item)">Accept</button>
+              </td>
+            </tr>
+          </table>
+        </div>
       </div>
-
-      <div class="col-md-4">
-        <canvas id="grid" width="300" height="300" style="border:1px solid #000000;">
+      <div class="col-md-5">
+        <canvas id="grid" width="450" height="500" style="border:1px solid #000000;">
           Your browser does not support the HTML5 canvas tag.
         </canvas>
         <div id="messageWrap" ng-controller="MessageController">
@@ -49,7 +68,7 @@
                     <b>{{item.name}}</b>
                   </td>
                   <td> Delay {{parseTimer(item.timer)}} </td>
-                  <td>  <button class="btn btn-primary" ng-click="buyUpgrade(item)">Create</button></td>
+                  <td>  <button class="btn btn-primary" ng-click="buildDroid(item)" ng-disabled="!hasResourcesToBuild(item)">Create</button></td>
                 </tr>
               </table>
               <table>
@@ -74,9 +93,9 @@
         <div class="column">
           <table class="table-aquired">
             <tr ng-repeat="item in aquired">
-              <td> <b>{{item.name}}</b></td>
-              <td> Delay {{parseTimer(item.timer)}} </td>
-              <td> <b>Quantity:</b> {{item.quantity}}</td>
+              <td>{{item.droid.name}}</td>
+              <td> {{parseTimer(item.currentDelay)}} </td>
+              <td> <b>Quantity:</b> {{item.droid.quantity}}</td>
             </tr>
           </table>
         </div>
@@ -86,10 +105,11 @@
 
   <script src="js/grid/canvas.js"></script>
   <script src="js/grid/grid.js"></script>
+  <script src="js/game/game.js"></script>
   <script src="js/game/materialData.js"></script>
   <script src="js/game/blockData.js"></script>
   <script src="js/game/droidData.js"></script>
-  <script src="js/game/game.js"></script>
+  <script src="js/game/tradeData.js"></script>
 
   <script>
     var game = new Game();

@@ -1,60 +1,83 @@
 var ServiceDroid = {
-  "name" : "Service Bot",
-  "timer" : 20000,
+  "name" : "Service Droid",
+  "timer" : 5000,
   "requirements" : [
     {
       "item" : MetalScrap,
-      "quantity" : 10
+      "quantity" : 35
     },
     {
       "item" : OldEquipment,
-      "quantity" : 2
-    },
-    {
-      "item" : PowerCell,
-      "quantity" : 1
-    }
-  ]
-};
-
-var SurvalianceDrone = {
-  "name" : "Courier Drone",
-  "timer" : 18000,
-  "requirements" : [
-    {
-      "item" : MetalScrap,
-      "quantity" : 25
-    },
-    {
-      "item" : OldEquipment,
-      "quantity" : 6
-    },
-    {
-      "item" : ReusableMaterial,
       "quantity" : 3
     },
     {
+      "item" : ToolBox,
+      "quantity" : 1
+    }
+  ]
+};
+
+var SmartCollector = {
+  "name" : "Smart Collector",
+  "timer" : 2500,
+  "requirements" : [
+    {
+      "item" : MetalScrap,
+      "quantity" : 35
+    },
+    {
+      "item" : OldEquipment,
+      "quantity" : 30
+    },
+    {
+      "item" : ReusableMaterial,
+      "quantity" : 15
+    },
+    {
+      "item" : ToolBox,
+      "quantity" : 1
+    }
+  ]
+};
+
+var CourierDrone = {
+  "name" : "Courier Drone",
+  "timer" : 1000,
+  "requirements" : [
+    {
+      "item" : ReusableMaterial,
+      "quantity" : 100
+    },
+    {
+      "item" : ToolBox,
+      "quantity" : 1
+    },
+    {
       "item" : PowerCell,
       "quantity" : 1
     }
   ]
 };
 
-var GarbadgeCollector = {
-  "name" : "Garbadge Collector",
-  "timer" : 15000,
+var AutomatedBulldozer = {
+  "name" : "Automated Bulldozer",
+  "timer" : 500,
   "requirements" : [
     {
       "item" : MetalScrap,
-      "quantity" : 50
+      "quantity" : 100
     },
     {
       "item" : OldEquipment,
-      "quantity" : 10
+      "quantity" : 100
     },
     {
       "item" : ReusableMaterial,
-      "quantity" : 4
+      "quantity" : 100
+    },
+    {
+      "item" : ToolBox,
+      "quantity" : 1
     },
     {
       "item" : PowerCell,
@@ -63,25 +86,29 @@ var GarbadgeCollector = {
   ]
 };
 
-var R2D2 = {
-  "name" : "R2D2",
-  "timer" : 8000,
+var SmartGarbageCollector = {
+  "name" : "Smart Garbage Collector",
+  "timer" : 250,
   "requirements" : [
     {
       "item" : MetalScrap,
-      "quantity" : 150
+      "quantity" : 180
     },
     {
       "item" : OldEquipment,
-      "quantity" : 80
+      "quantity" : 180
     },
     {
       "item" : ReusableMaterial,
-      "quantity" : 80
+      "quantity" : 180
+    },
+    {
+      "item" : ToolBox,
+      "quantity" : 1
     },
     {
       "item" : PowerCell,
-      "quantity" : 5
+      "quantity" : 2
     }
   ]
 };

@@ -10,6 +10,30 @@ var OldEquipment = {
   "filename" : "old_equipment.png"
 }
 
+var Battery = {
+  "name" : "Battery",
+  "amount" : 0,
+  "filename" : "batteries.png"
+}
+
+var PreciousItem = {
+  "name" : "Precious Item",
+  "amount" : 0,
+  "filename" : "precious_item.png"
+}
+
+var ToolBox = {
+  "name" : "Tool Box",
+  "amount" : 0,
+  "filename" : "tool_box.png"
+}
+
+var ValuableData = {
+  "name" : "Valuable Data",
+  "amount" : 0,
+  "filename" : "valuable_data.png"
+}
+
 var ReusableMaterial = {
   "name" : "Reusable material",
   "amount" : 0,
